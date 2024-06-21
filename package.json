@@ -3,16 +3,29 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "lint": "eslint --fix resources",
+        "lint:check": "eslint resources",
+        "format": "prettier 'resources/{js,vue}/**/*.{js,vue}' --write --list-different",
+        "format:check": "prettier 'resources/{js,vue}/**/*.{js,vue}' --check",
+        "fl:check": "npm run format:check && npm run lint:check",
+        "fl": "npm run format && npm run lint"
     },
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.0",
         "@tailwindcss/forms": "^0.5.3",
         "@vitejs/plugin-vue": "^5.0.0",
+        "@vue/typescript": "^1.8.20",
         "autoprefixer": "^10.4.12",
         "axios": "^1.6.4",
+        "eslint": "^9.5.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-vue": "^9.26.0",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.31",
+        "prettier": "^3.3.2",
+        "prettier-plugin-organize-imports": "^3.2.4",
+        "prettier-plugin-tailwindcss": "^0.6.5",
         "tailwindcss": "^3.2.1",
         "vite": "^5.0",
         "vue": "^3.4.0"
