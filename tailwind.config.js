@@ -1,4 +1,5 @@
 import forms from '@tailwindcss/forms';
+import defaultColors from 'tailwindcss/colors';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
@@ -15,6 +16,11 @@ export default {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
+    },
+    colors: {
+      ...defaultColors,
+      primary: defaultColors.indigo,
+      gray: defaultColors.neutral,
     },
   },
 
