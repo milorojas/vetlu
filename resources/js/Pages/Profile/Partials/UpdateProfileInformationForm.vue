@@ -25,12 +25,12 @@ const form = useForm({
 <template>
   <section>
     <header>
-      <h2 class="text-lg font-medium text-gray-900">Profile Information</h2>
+      <h2 class="font-medium text-gray-900">Profile Information</h2>
 
       <p class="mt-1 text-sm text-gray-600">Update your account's profile information and email address.</p>
     </header>
 
-    <form class="mt-6 space-y-6" @submit.prevent="form.patch(route('profile.update'))">
+    <form class="mt-6 space-y-4" @submit.prevent="form.patch(route('profile.update'))">
       <div>
         <InputLabel for="name" value="Name" />
 
@@ -67,7 +67,7 @@ const form = useForm({
             :href="route('verification.send')"
             method="post"
             as="button"
-            class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+            class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Click here to re-send the verification email.
           </Link>
         </p>
