@@ -2,13 +2,10 @@
 import { useUser } from '@/Composables/user.js';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import { Icon } from '@iconify/vue';
-import { Link, router } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
+import { trans } from 'laravel-vue-i18n';
 
 const user = useUser();
-
-const logout = () => {
-  router.post(route('logout'));
-};
 </script>
 <template>
   <!-- User account dropdown -->
@@ -24,7 +21,10 @@ const logout = () => {
               alt="" />
             <span class="flex min-w-0 flex-1 flex-col">
               <span class="truncate text-sm font-medium text-gray-900">{{ user.name }}</span>
-              <span class="truncate text-sm text-gray-500">{{ user.email }}</span>
+              <span class="truncate text-xs text-gray-500">
+                <Icon icon="tabler:building" class="w-3 h-3 inline-block mr-1" />
+                {{ 'Av. Suecia 1234' }}
+              </span>
             </span>
           </span>
           <Icon
@@ -48,29 +48,16 @@ const logout = () => {
             <Link
               :href="route('profile.edit')"
               :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-              Profile
+              <Icon icon="tabler:user" class="w-4 h-4 inline-block mr-2" />
+              {{ trans('Profile') }}
             </Link>
-          </MenuItem>
-          <MenuItem v-slot="{ active }">
-            <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-              Settings
-            </a>
-          </MenuItem>
-          <MenuItem v-slot="{ active }">
-            <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-              Notifications
-            </a>
           </MenuItem>
         </div>
         <div class="py-1">
           <MenuItem v-slot="{ active }">
             <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-              Get desktop app
-            </a>
-          </MenuItem>
-          <MenuItem v-slot="{ active }">
-            <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-              Support
+              <Icon icon="tabler:building" class="w-4 h-4 inline-block mr-2" />
+              {{ trans('Change local') }}
             </a>
           </MenuItem>
         </div>
@@ -85,7 +72,8 @@ const logout = () => {
                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                 'block px-4 py-2 text-sm w-full text-left',
               ]">
-              Logout
+              <Icon icon="tabler:logout" class="w-4 h-4 inline-block mr-2 text-red-500" />
+              {{ trans('Logout') }}
             </Link>
           </MenuItem>
         </div>
