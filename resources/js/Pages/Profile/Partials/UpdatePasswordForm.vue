@@ -37,9 +37,9 @@ const updatePassword = () => {
 <template>
   <section>
     <header>
-      <h2 class="font-medium text-gray-900">{{ trans('Update Password') }}</h2>
+      <h2 class="text-base font-semibold leading-7 text-gray-900">{{ trans('Update Password') }}</h2>
 
-      <p class="mt-1 text-sm text-gray-600">
+      <p class="mt-1 text-sm leading-6 text-gray-600">
         {{ trans('Ensure your account is using a long, random password to stay secure.') }}
       </p>
     </header>

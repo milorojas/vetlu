@@ -12,7 +12,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <nav class="flex pb-6 max-w-7xl mx-auto sm:px-6 lg:px-8 px-4" aria-label="Breadcrumb">
+  <nav class="flex pb-6 max-w-7xl mx-auto px-4 sm:px-8 lg:px-16" aria-label="Breadcrumb">
     <ol role="list" class="flex items-center space-x-4">
       <li>
         <div>

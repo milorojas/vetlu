@@ -26,9 +26,9 @@ const form = useForm({
 <template>
   <section>
     <header>
-      <h2 class="font-medium text-gray-900">{{ trans('Profile Information') }}</h2>
+      <h2 class="text-base font-semibold leading-7 text-gray-900">{{ trans('Profile Information') }}</h2>
 
-      <p class="mt-1 text-sm text-gray-600">
+      <p class="mt-1 text-sm leading-6 text-gray-600">
         {{ trans("Update your account's profile information and email address.") }}
       </p>
     </header>
