@@ -1,9 +1,8 @@
 <script setup>
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
+import { useUser } from '@/Composables/user';
 import SidebaLayout from '@/Layouts/SidebarLayout.vue';
 import { Head } from '@inertiajs/vue3';
-
-import { useUser } from '@/Composables/user';
 
 const user = useUser();
 </script>

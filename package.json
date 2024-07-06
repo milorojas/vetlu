@@ -33,7 +33,13 @@
     },
     "dependencies": {
         "@headlessui/vue": "^1.7.22",
+        "@radix-icons/vue": "^1.0.0",
+        "class-variance-authority": "^0.7.0",
+        "clsx": "^2.1.1",
         "laravel-vue-i18n": "^2.7.7",
+        "radix-vue": "^1.9.0",
+        "tailwind-merge": "^2.3.0",
+        "tailwindcss-animate": "^1.0.7",
         "vue-sonner": "^1.1.3"
     }
 }
