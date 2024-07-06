@@ -22,7 +22,7 @@ const user = useUser();
             <span class="flex min-w-0 flex-1 flex-col">
               <span class="truncate text-sm font-medium text-gray-900">{{ user.name }}</span>
               <span class="truncate text-xs text-gray-500">
-                <Icon icon="tabler:building" class="w-3 h-3 inline-block mr-1" />
+                <Icon icon="tabler:building-hospital" class="w-3 h-3 inline-block mr-1" />
                 {{ 'Av. Suecia 1234' }}
               </span>
             </span>
@@ -56,8 +56,8 @@ const user = useUser();
         <div class="py-1">
           <MenuItem v-slot="{ active }">
             <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-              <Icon icon="tabler:building" class="w-4 h-4 inline-block mr-2" />
-              {{ trans('Change local') }}
+              <Icon icon="tabler:building-hospital" class="w-4 h-4 inline-block mr-2" />
+              {{ trans('Change location') }}
             </a>
           </MenuItem>
         </div>
