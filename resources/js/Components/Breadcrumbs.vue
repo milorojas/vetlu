@@ -26,7 +26,7 @@ const props = defineProps({
         <div class="flex items-center">
           <Icon icon="tabler:chevron-right" class="h-5 w-5 flex-shrink-0 text-gray-500" aria-hidden="true" />
           <Link
-            :href="route(page.route)"
+            :href="page.route"
             class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
             :aria-current="page.current ? 'page' : undefined">
             {{ page.name }}

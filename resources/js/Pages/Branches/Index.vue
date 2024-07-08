@@ -17,7 +17,7 @@ const props = defineProps({
 <template>
   <SidebarLayout :title="$t('Branches')">
     <div class="py-4">
-      <Breadcrumbs :pages="[{ name: $t('Branches'), route: 'branches.index', current: true }]" />
+      <Breadcrumbs :pages="[{ name: $t('Branches'), route: route('branches.index'), current: true }]" />
       <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16">
         <div class="sm:flex sm:items-center">
           <div class="sm:flex-auto">

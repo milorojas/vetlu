@@ -23,7 +23,7 @@ defineProps({
 <template>
   <SidebarLayout :title="$t('Profile')">
     <div class="py-4">
-      <Breadcrumbs :pages="[{ name: $t('Profile'), route: 'profile.edit', current: true }]" />
+      <Breadcrumbs :pages="[{ name: $t('Profile'), route: route('profile.edit'), current: true }]" />
       <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 space-y-6">
         <div class="bg-white border-b border-gray-900/10 pb-6">
           <UpdateProfileInformationForm :must-verify-email="mustVerifyEmail" :status="status" class="max-w-xl" />
