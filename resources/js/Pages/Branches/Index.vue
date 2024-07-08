@@ -1,5 +1,15 @@
 <script setup>
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/Components/ui/alert-dialog';
 import Button from '@/Components/ui/button/Button.vue';
 import {
   DropdownMenu,
@@ -12,6 +22,7 @@ import BaseLayout from '@/Layouts/BaseLayout.vue';
 import SidebarLayout from '@/Layouts/SidebarLayout.vue';
 import { Icon } from '@iconify/vue';
 import { Link, router } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 defineOptions({
   layout: BaseLayout,
@@ -20,6 +31,9 @@ defineOptions({
 const props = defineProps({
   branches: Array,
 });
+
+const showConfirmationDialog = ref(false);
+const branchToDelete = ref(null);
 </script>
 
 <template>
@@ -56,7 +70,7 @@ const props = defineProps({
                       {{ $t('Email') }}
                     </th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      {{ $t('Status') }}sd
+                      {{ $t('Status') }}
                     </th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                       <span class="sr-only">{{ $t('Edit') }}</span>
@@ -95,7 +109,7 @@ const props = defineProps({
                               <span>{{ $t('Edit') }}</span>
                             </DropdownMenuItem>
 
-                            <DropdownMenuItem @select="router.delete(route('branches.destroy', branch.id))">
+                            <DropdownMenuItem @select="(showConfirmationDialog = true), (branchToDelete = branch.id)">
                               <Icon icon="tabler:trash" class="w-4 h-4 inline-block mr-2 text-red-500" />
                               <span>{{ $t('Delete') }}</span>
                             </DropdownMenuItem>
@@ -111,5 +125,24 @@ const props = defineProps({
         </div>
       </div>
     </div>
+
+    <AlertDialog :open="showConfirmationDialog" @update:open="showConfirmationDialog = $event">
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{{ $t('Are you sure?') }}</AlertDialogTitle>
+          <AlertDialogDescription>
+            {{ $t('This action cannot be undone. Are you sure you want to delete this branch?') }}
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>{{ $t('Cancel') }}</AlertDialogCancel>
+          <AlertDialogAction
+            class="bg-red-500 hover:bg-red-500/90"
+            @click="router.delete(route('branches.destroy', branchToDelete))">
+            {{ $t('Delete') }}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   </SidebarLayout>
 </template>

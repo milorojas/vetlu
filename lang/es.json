@@ -272,5 +272,7 @@
   "Branch updated successfully.": "Sucursal actualizada con éxito.",
   "Branch deleted successfully.": "Sucursal eliminada con éxito.",
   "You cannot delete the branch you are currently using.": "No puede eliminar la sucursal que está utilizando actualmente.",
-  "Branch switched successfully.": "Sucursal cambiada con éxito."
+  "Branch switched successfully.": "Sucursal cambiada con éxito.",
+  "Are you sure?": "¿Estás seguro?",
+  "This action cannot be undone. Are you sure you want to delete this branch?": "Esta acción no se puede deshacer. ¿Estás seguro que deseas eliminar esta sucursal?"
 }
