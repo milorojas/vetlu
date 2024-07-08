@@ -1,13 +1,13 @@
 <script setup>
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
+import BaseLayout from '@/Layouts/BaseLayout.vue';
 import SidebarLayout from '@/Layouts/SidebarLayout.vue';
-import { Head } from '@inertiajs/vue3';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 
 defineOptions({
-  layout: SidebarLayout,
+  layout: BaseLayout,
 });
 
 defineProps({
@@ -21,9 +21,7 @@ defineProps({
 </script>
 
 <template>
-  <div>
-    <Head title="Profile" />
-
+  <SidebarLayout :title="$t('Profile')">
     <div class="py-4">
       <Breadcrumbs :pages="[{ name: $t('Profile'), route: 'profile.edit', current: true }]" />
       <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 space-y-6">
@@ -40,5 +38,5 @@ defineProps({
         </div>
       </div>
     </div>
-  </div>
+  </SidebarLayout>
 </template>

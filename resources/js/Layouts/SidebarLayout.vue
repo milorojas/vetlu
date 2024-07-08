@@ -3,7 +3,6 @@ import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessu
 import { Icon } from '@iconify/vue';
 import { Head, router, usePage } from '@inertiajs/vue3';
 import { onUnmounted, ref } from 'vue';
-import { Toaster, toast } from 'vue-sonner';
 import Navigation from './Partials/Navigation.vue';
 import UserDropdown from './Partials/UserDropdown.vue';
 
@@ -30,7 +29,6 @@ onUnmounted(() => removeFinshEventListener());
 
 <template>
   <div>
-    <Toaster />
     <Head :title="title" />
 
     <TransitionRoot as="template" :show="sidebarOpen">

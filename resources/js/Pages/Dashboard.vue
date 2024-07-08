@@ -2,20 +2,19 @@
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Button from '@/Components/ui/button/Button.vue';
 import { useUser } from '@/Composables/user';
+import BaseLayout from '@/Layouts/BaseLayout.vue';
 import SidebarLayout from '@/Layouts/SidebarLayout.vue';
-import { Head, router } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 
 defineOptions({
-  layout: SidebarLayout,
+  layout: BaseLayout,
 });
 
 const user = useUser();
 </script>
 
 <template>
-  <div>
-    <Head :title="$t('Dashboard')" />
-
+  <SidebarLayout :title="$t('Dashboard')">
     <div class="py-4">
       <Breadcrumbs :pages="[{ name: $t('Dashboard'), route: 'dashboard', current: true }]" />
       <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16">
@@ -25,5 +24,5 @@ const user = useUser();
         </div>
       </div>
     </div>
-  </div>
+  </SidebarLayout>
 </template>

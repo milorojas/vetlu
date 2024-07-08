@@ -1,11 +1,12 @@
 <script setup>
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Button from '@/Components/ui/button/Button.vue';
+import BaseLayout from '@/Layouts/BaseLayout.vue';
 import SidebarLayout from '@/Layouts/SidebarLayout.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 
 defineOptions({
-  layout: SidebarLayout,
+  layout: BaseLayout,
 });
 
 const props = defineProps({
@@ -14,9 +15,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div>
-    <Head :title="$t('Branches')" />
-
+  <SidebarLayout :title="$t('Branches')">
     <div class="py-4">
       <Breadcrumbs :pages="[{ name: $t('Branches'), route: 'branches.index', current: true }]" />
       <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16">
@@ -90,5 +89,5 @@ const props = defineProps({
         </div>
       </div>
     </div>
-  </div>
+  </SidebarLayout>
 </template>
