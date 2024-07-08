@@ -20,7 +20,15 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'current_branch',
     ];
+
+    /**
+     * The attributes that should be appended to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $with = ['branch'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -48,7 +56,7 @@ class User extends Authenticatable
     /**
      * Make it available in the json response
      */
-    protected $appends = ['profile_photo_url'];
+    protected $appends = ['profile_photo_url', 'branches'];
 
     /**
      * Get the default profile photo URL if no profile photo has been uploaded.
@@ -62,5 +70,23 @@ class User extends Authenticatable
         })->join(' '));
 
         return 'https://ui-avatars.com/api/?name='.urlencode($name).'&color=6366f1&background=e0e7ff';
+    }
+
+    /**
+     * Get the branch
+     */
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'current_branch');
+    }
+
+    /**
+     * Get all the branches
+     */
+    public function getBranchesAttribute()
+    {
+        $branches =  Branch::all();
+
+        return $branches;
     }
 }

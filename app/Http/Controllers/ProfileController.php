@@ -60,4 +60,20 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    /**
+     * Switch the user's current branch.
+     */
+    public function switchBranch(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'current_branch' => ['required', 'exists:branches,id'],
+        ]);
+
+        $request->user()->update([
+            'current_branch' => $request->current_branch,
+        ]);
+
+        return redirect()->to('/dashboard');
+    }
 }

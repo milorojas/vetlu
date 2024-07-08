@@ -7,12 +7,45 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/Components/ui/dropdown-menu';
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/Components/ui/select';
+
+import { Button } from '@/Components/ui/button';
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/Components/ui/dialog';
+
 import { useUser } from '@/Composables/user.js';
 import { Icon } from '@iconify/vue';
 import { router } from '@inertiajs/vue3';
 import { Primitive } from 'radix-vue';
+import { ref } from 'vue';
 
 const user = useUser();
+
+// Change branch dialog
+const selectedBranch = ref(user.value.current_branch != null ? String(user.value.current_branch) : '');
+const branches = user.value.branches;
+const showDialogChangeBranch = ref(false);
+
+const updateBranch = () => {
+  showDialogChangeBranch.value = false;
+  router.patch(route('profile.switch-branch', { current_branch: selectedBranch.value }));
+};
 </script>
 <template>
   <!-- User account dropdown -->
@@ -29,7 +62,7 @@ const user = useUser();
                 <span class="truncate text-sm font-medium text-gray-900">{{ user.name }}</span>
                 <span class="truncate text-xs text-gray-500">
                   <Icon icon="tabler:building-hospital" class="w-3 h-3 inline-block mr-1" />
-                  {{ 'Av. Suecia 1234' }}
+                  {{ user.branch.name }}
                 </span>
               </span>
             </span>
@@ -49,7 +82,7 @@ const user = useUser();
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem @select="showDialogChangeBranch = true">
             <Icon icon="tabler:building-hospital" class="w-4 h-4 inline-block mr-2" />
             <span>{{ $t('Change branch') }}</span>
           </DropdownMenuItem>
@@ -61,5 +94,36 @@ const user = useUser();
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+
+    <!-- Change branch -->
+    <Dialog :open="showDialogChangeBranch" @update:open="showDialogChangeBranch = $event">
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{{ $t('Change branch') }}</DialogTitle>
+          <DialogDescription>{{ $t('Select the branch you want to work with') }}</DialogDescription>
+        </DialogHeader>
+
+        <Select v-model="selectedBranch">
+          <SelectTrigger>
+            <SelectValue :placeholder="$t('Select a branch')" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>{{ $t('Branches') }}</SelectLabel>
+
+              <SelectItem v-for="branch in branches" :key="branch.id" :value="String(branch.id)">
+                {{ branch.name }}
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+
+        <DialogFooter>
+          <Button :disabled="selectedBranch == ''" @click="updateBranch()">
+            {{ $t('Save') }}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   </div>
 </template>
