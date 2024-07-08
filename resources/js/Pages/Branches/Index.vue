@@ -18,6 +18,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/Components/ui/dropdown-menu';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/Components/ui/table';
 import BaseLayout from '@/Layouts/BaseLayout.vue';
 import SidebarLayout from '@/Layouts/SidebarLayout.vue';
 import { Icon } from '@iconify/vue';
@@ -57,34 +58,24 @@ const branchToDelete = ref(null);
         <div class="mt-8 flow-root">
           <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-              <table class="min-w-full divide-y divide-gray-300">
-                <thead>
-                  <tr>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                      {{ $t('Name') }}
-                    </th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      {{ $t('Address') }}
-                    </th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      {{ $t('Email') }}
-                    </th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      {{ $t('Status') }}
-                    </th>
-                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                      <span class="sr-only">{{ $t('Edit') }}</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-200">
-                  <tr v-for="branch in props.branches" :key="branch.id">
-                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                      {{ branch.name }}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ branch.address }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ branch.email }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>#</TableHead>
+                    <TableHead>{{ $t('Name') }}</TableHead>
+                    <TableHead>{{ $t('Address') }}</TableHead>
+                    <TableHead>{{ $t('Email') }}</TableHead>
+                    <TableHead>{{ $t('Status') }}</TableHead>
+                    <TableHead></TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow v-for="branch in props.branches" :key="branch.id">
+                    <TableCell class="font-medium">{{ branch.id }}</TableCell>
+                    <TableCell>{{ branch.name }}</TableCell>
+                    <TableCell>{{ branch.address }}</TableCell>
+                    <TableCell>{{ branch.email }}</TableCell>
+                    <TableCell>
                       <span
                         v-if="branch.status === 'active'"
                         class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
@@ -96,8 +87,8 @@ const branchToDelete = ref(null);
                         class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
                         {{ $t('Inactive') }}
                       </span>
-                    </td>
-                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                    </TableCell>
+                    <TableCell>
                       <DropdownMenu>
                         <DropdownMenuTrigger as-child>
                           <Icon icon="tabler:dots" class="w-5 h-5 text-gray-400" />
@@ -116,10 +107,10 @@ const branchToDelete = ref(null);
                           </DropdownMenuGroup>
                         </DropdownMenuContent>
                       </DropdownMenu>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
             </div>
           </div>
         </div>
