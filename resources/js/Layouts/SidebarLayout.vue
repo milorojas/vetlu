@@ -1,8 +1,8 @@
 <script setup>
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
 import { Icon } from '@iconify/vue';
-import { Head, router, usePage } from '@inertiajs/vue3';
-import { onUnmounted, ref } from 'vue';
+import { Head } from '@inertiajs/vue3';
+import { ref } from 'vue';
 import Navigation from './Partials/Navigation.vue';
 import UserDropdown from './Partials/UserDropdown.vue';
 
@@ -11,20 +11,6 @@ defineProps({
 });
 
 const sidebarOpen = ref(false);
-
-const page = usePage();
-
-let removeFinshEventListener = router.on('finish', () => {
-  if (page.props.toast) {
-    if (page.props.toast.type === 'success') {
-      toast.success(page.props.toast.message);
-    } else {
-      toast.error(page.props.toast.message);
-    }
-  }
-});
-
-onUnmounted(() => removeFinshEventListener());
 </script>
 
 <template>
