@@ -60,10 +60,12 @@ const updateBranch = () => {
               <img class="h-10 w-10 flex-shrink-0 rounded-md bg-gray-300" :src="user.profile_photo_url" alt="" />
               <span class="flex min-w-0 flex-1 flex-col">
                 <span class="truncate text-sm font-medium text-gray-900">{{ user.name }}</span>
-                <span class="truncate text-xs text-gray-500">
+                <div class="flex items-center">
                   <Icon icon="tabler:building-hospital" class="w-3 h-3 inline-block mr-1" />
-                  {{ user.branch.name }}
-                </span>
+                  <span class="truncate text-xs text-gray-500">
+                    {{ user.branch?.name ? user.branch.name : $t('No branch selected') }}
+                  </span>
+                </div>
               </span>
             </span>
             <Icon

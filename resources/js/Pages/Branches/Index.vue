@@ -1,11 +1,8 @@
 <script setup>
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
+import Button from '@/Components/ui/button/Button.vue';
 import SidebaLayout from '@/Layouts/SidebarLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
-
-import { useUser } from '@/Composables/user';
-
-const user = useUser();
 
 const props = defineProps({
   branches: Array,
@@ -27,11 +24,9 @@ const props = defineProps({
             </p>
           </div>
           <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <Link
-              :href="route('branches.create')"
-              class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            <Button :as="Link" :href="route('branches.create')">
               {{ $t('Add branch') }}
-            </Link>
+            </Button>
           </div>
         </div>
         <div class="mt-8 flow-root">
@@ -50,7 +45,7 @@ const props = defineProps({
                       {{ $t('Email') }}
                     </th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      {{ $t('Status') }}
+                      {{ $t('Status') }}sd
                     </th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                       <span class="sr-only">{{ $t('Edit') }}</span>
