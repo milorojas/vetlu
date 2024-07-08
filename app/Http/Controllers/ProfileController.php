@@ -74,6 +74,9 @@ class ProfileController extends Controller
             'current_branch' => $request->current_branch,
         ]);
 
-        return redirect()->to('/dashboard');
+        return redirect()->to('/dashboard')->with('toast', [
+            'message' => __('Branch switched successfully.'),
+            'type' => 'success',
+        ]);
     }
 }
