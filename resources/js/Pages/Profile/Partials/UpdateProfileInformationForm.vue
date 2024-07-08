@@ -1,8 +1,8 @@
 <script setup>
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import Button from '@/Components/ui/button/Button.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
 import { trans } from 'laravel-vue-i18n';
 
@@ -81,7 +81,7 @@ const form = useForm({
       </div>
 
       <div class="flex items-center gap-4">
-        <PrimaryButton :disabled="form.processing">{{ trans('Save') }}</PrimaryButton>
+        <Button :disabled="form.processing">{{ trans('Save') }}</Button>
 
         <Transition
           enter-active-class="transition ease-in-out"

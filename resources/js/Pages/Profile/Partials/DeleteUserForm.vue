@@ -1,10 +1,9 @@
 <script setup>
-import DangerButton from '@/Components/DangerButton.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import Modal from '@/Components/Modal.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import Button from '@/Components/ui/button/Button.vue';
 import { useForm } from '@inertiajs/vue3';
 import { trans } from 'laravel-vue-i18n';
 import { nextTick, ref } from 'vue';
@@ -52,7 +51,7 @@ const closeModal = () => {
       </p>
     </header>
 
-    <DangerButton @click="confirmUserDeletion">{{ trans('Delete Account') }}</DangerButton>
+    <Button variant="destructive" @click="confirmUserDeletion">{{ trans('Delete Account') }}</Button>
 
     <Modal :show="confirmingUserDeletion" @close="closeModal">
       <div class="p-6">
@@ -82,15 +81,11 @@ const closeModal = () => {
         </div>
 
         <div class="mt-6 flex justify-end">
-          <SecondaryButton @click="closeModal">{{ trans('Cancel') }}</SecondaryButton>
+          <Button variant="outline" @click="closeModal">{{ trans('Cancel') }}</Button>
 
-          <DangerButton
-            class="ms-3"
-            :class="{ 'opacity-25': form.processing }"
-            :disabled="form.processing"
-            @click="deleteUser">
+          <Button class="ms-3" variant="destructive" :disabled="form.processing" @click="deleteUser">
             {{ trans('Delete Account') }}
-          </DangerButton>
+          </Button>
         </div>
       </div>
     </Modal>
