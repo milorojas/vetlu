@@ -7,7 +7,7 @@ const navigation = [
     name: 'Dashboard',
     href: route('dashboard'),
     icon: 'tabler:home',
-    current: usePage().url.startsWith('/dashboard'),
+    current: usePage().component.startsWith('Dashboard'),
   },
 ];
 
@@ -16,7 +16,7 @@ const navigationSettings = [
     name: 'Branches',
     href: route('branches.index'),
     icon: 'tabler:building-hospital',
-    current: usePage().url.startsWith('/branches'),
+    current: usePage().component.startsWith('Branches/Index'),
   },
 ];
 </script>

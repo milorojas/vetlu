@@ -1,8 +1,12 @@
 <script setup>
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Button from '@/Components/ui/button/Button.vue';
-import SidebaLayout from '@/Layouts/SidebarLayout.vue';
+import SidebarLayout from '@/Layouts/SidebarLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
+
+defineOptions({
+  layout: SidebarLayout,
+});
 
 const props = defineProps({
   branches: Array,
@@ -10,9 +14,9 @@ const props = defineProps({
 </script>
 
 <template>
-  <Head :title="$t('Branches')" />
+  <div>
+    <Head :title="$t('Branches')" />
 
-  <SidebaLayout>
     <div class="py-4">
       <Breadcrumbs :pages="[{ name: $t('Branches'), route: 'branches.index', current: true }]" />
       <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16">
@@ -86,5 +90,5 @@ const props = defineProps({
         </div>
       </div>
     </div>
-  </SidebaLayout>
+  </div>
 </template>
