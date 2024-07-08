@@ -1,13 +1,8 @@
 <script setup>
+import { Icon } from '@iconify/vue';
 import { router, usePage } from '@inertiajs/vue3';
-import { onUnmounted, ref } from 'vue';
+import { onUnmounted } from 'vue';
 import { Toaster, toast } from 'vue-sonner';
-
-defineProps({
-  title: String,
-});
-
-const sidebarOpen = ref(false);
 
 const page = usePage();
 
@@ -26,7 +21,14 @@ onUnmounted(() => removeFinshEventListener());
 
 <template>
   <div>
-    <Toaster />
+    <Toaster>
+      <template #success-icon>
+        <Icon icon="tabler:circle-check" class="h-5 w-5 text-green-500" />
+      </template>
+      <template #error-icon>
+        <Icon icon="tabler:exclamation-circle" class="h-5 w-5 text-red-500" />
+      </template>
+    </Toaster>
     <slot />
   </div>
 </template>

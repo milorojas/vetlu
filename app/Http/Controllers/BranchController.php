@@ -33,9 +33,18 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'email' => 'required|email'
+        ]);
+
         Branch::create($request->all());
 
-        return redirect()->route('branches.index');
+        return redirect()->route('branches.index')->with('toast', [
+            'message' => __('Branch created successfully.'),
+            'type' => 'success',
+        ]);
     }
 
     /**
@@ -51,7 +60,9 @@ class BranchController extends Controller
      */
     public function edit(Branch $branch)
     {
-        //
+        return Inertia::render('Branches/Edit', [
+            'branch' => $branch,
+        ]);
     }
 
     /**
@@ -59,7 +70,18 @@ class BranchController extends Controller
      */
     public function update(Request $request, Branch $branch)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'email' => 'required|email'
+        ]);
+
+        $branch->update($request->all());
+
+        return redirect()->route('branches.index')->with('toast', [
+            'message' => __('Branch updated successfully.'),
+            'type' => 'success',
+        ]);
     }
 
     /**
@@ -67,6 +89,18 @@ class BranchController extends Controller
      */
     public function destroy(Branch $branch)
     {
-        //
+        if ($branch->id === auth()->user()->current_branch) {
+            return redirect()->route('branches.index')->with('toast', [
+                'message' => __('You cannot delete the branch you are currently using.'),
+                'type' => 'error',
+            ]);
+        }
+
+        $branch->delete();
+
+        return redirect()->route('branches.index')->with('toast', [
+            'message' => __('Branch deleted successfully.'),
+            'type' => 'success',
+        ]);
     }
 }

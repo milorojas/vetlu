@@ -1,9 +1,17 @@
 <script setup>
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Button from '@/Components/ui/button/Button.vue';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/Components/ui/dropdown-menu';
 import BaseLayout from '@/Layouts/BaseLayout.vue';
 import SidebarLayout from '@/Layouts/SidebarLayout.vue';
-import { Link } from '@inertiajs/vue3';
+import { Icon } from '@iconify/vue';
+import { Link, router } from '@inertiajs/vue3';
 
 defineOptions({
   layout: BaseLayout,
@@ -76,10 +84,24 @@ const props = defineProps({
                       </span>
                     </td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <a href="#" class="text-indigo-600 hover:text-indigo-900">
-                        Edit
-                        <span class="sr-only">, {{ branch.name }}</span>
-                      </a>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger as-child>
+                          <Icon icon="tabler:dots" class="w-5 h-5 text-gray-400" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          <DropdownMenuGroup>
+                            <DropdownMenuItem @select="router.visit(route('branches.edit', branch.id))">
+                              <Icon icon="tabler:edit" class="w-4 h-4 inline-block mr-2" />
+                              <span>{{ $t('Edit') }}</span>
+                            </DropdownMenuItem>
+
+                            <DropdownMenuItem @select="router.delete(route('branches.destroy', branch.id))">
+                              <Icon icon="tabler:trash" class="w-4 h-4 inline-block mr-2 text-red-500" />
+                              <span>{{ $t('Delete') }}</span>
+                            </DropdownMenuItem>
+                          </DropdownMenuGroup>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </td>
                   </tr>
                 </tbody>

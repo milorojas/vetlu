@@ -29,12 +29,4 @@ Route::middleware('auth')->group(function () {
 // Branches routes
 Route::resource('branches', BranchController::class)->middleware('auth');
 
-// Test routes
-Route::post('/test-toast', function () {
-    return redirect()->back()->with('toast', [
-        'message' => 'This is a toast message',
-        'type' => 'error',
-    ]);
-})->name('test.toast');
-
 require __DIR__.'/auth.php';

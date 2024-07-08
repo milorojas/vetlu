@@ -7,41 +7,47 @@ import Button from '@/Components/ui/button/Button.vue';
 import BaseLayout from '@/Layouts/BaseLayout.vue';
 import SidebaLayout from '@/Layouts/SidebarLayout.vue';
 import { useForm } from '@inertiajs/vue3';
-import { trans } from 'laravel-vue-i18n';
 
 defineOptions({
   layout: BaseLayout,
 });
 
+const props = defineProps({
+  branch: {
+    type: Object,
+    required: true,
+  },
+});
+
 const form = useForm({
-  name: '',
-  address: '',
-  email: '',
+  name: props.branch.name,
+  address: props.branch.address,
+  email: props.branch.email,
 });
 </script>
 
 <template>
-  <SidebaLayout>
+  <SidebaLayout :title="$t('Edit Branch')">
     <div class="py-4">
       <Breadcrumbs
         :pages="[
           { name: $t('Branches'), route: route('branches.index'), current: false },
-          { name: $t('Create'), route: route('branches.create'), current: true },
+          { name: $t('Edit'), route: route('branches.edit', branch.id), current: true },
         ]" />
       <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 space-y-6">
         <div class="bg-white border-b border-gray-900/10 pb-6">
           <section>
             <header>
-              <h2 class="text-base font-semibold leading-7 text-gray-900">{{ trans('Branch Information') }}</h2>
+              <h2 class="text-base font-semibold leading-7 text-gray-900">{{ $t('Branch Information') }}</h2>
 
               <p class="mt-1 text-sm leading-6 text-gray-600">
-                {{ trans('Complete the form below to create a new branch.') }}
+                {{ $t('Modify the form below to update the branch.') }}
               </p>
             </header>
 
-            <form class="mt-6 space-y-4" @submit.prevent="form.post(route('branches.store'))">
+            <form class="mt-6 space-y-4" @submit.prevent="form.patch(route('branches.update', branch.id))">
               <div>
-                <InputLabel for="name" :value="trans('Name')" />
+                <InputLabel for="name" :value="$t('Name')" />
 
                 <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full" />
 
@@ -49,7 +55,7 @@ const form = useForm({
               </div>
 
               <div>
-                <InputLabel for="address" :value="trans('Address')" />
+                <InputLabel for="address" :value="$t('Address')" />
 
                 <TextInput id="address" v-model="form.address" type="text" class="mt-1 block w-full" />
 
@@ -57,7 +63,7 @@ const form = useForm({
               </div>
 
               <div>
-                <InputLabel for="email" :value="trans('Email')" />
+                <InputLabel for="email" :value="$t('Email')" />
 
                 <TextInput id="email" v-model="form.email" type="text" class="mt-1 block w-full" />
 
