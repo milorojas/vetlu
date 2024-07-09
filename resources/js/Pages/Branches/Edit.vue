@@ -4,6 +4,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import Button from '@/Components/ui/button/Button.vue';
+import { Progress } from '@/Components/ui/progress';
 import BaseLayout from '@/Layouts/BaseLayout.vue';
 import SidebaLayout from '@/Layouts/SidebarLayout.vue';
 import { useForm } from '@inertiajs/vue3';
@@ -23,6 +24,9 @@ const form = useForm({
   name: props.branch.name,
   address: props.branch.address,
   email: props.branch.email,
+  image: props.branch.image,
+  imageUrl: props.branch.imageUrl,
+  _method: 'PUT',
 });
 </script>
 
@@ -45,7 +49,7 @@ const form = useForm({
               </p>
             </header>
 
-            <form class="mt-6 space-y-4" @submit.prevent="form.patch(route('branches.update', branch.id))">
+            <form class="mt-6 space-y-4" @submit.prevent="form.post(route('branches.update', branch.id))">
               <div>
                 <InputLabel for="name" :value="$t('Name')" />
 
@@ -68,6 +72,39 @@ const form = useForm({
                 <TextInput id="email" v-model="form.email" type="text" class="mt-1 block w-full" />
 
                 <InputError class="mt-2" :message="form.errors.email" />
+              </div>
+
+              <div>
+                <InputLabel for="image" :value="$t('Image')" />
+                <img
+                  v-if="form.imageUrl !== null"
+                  :src="'/storage/' + form.imageUrl"
+                  alt="Branch Image"
+                  class="mt-1 w-24 h-24 object-cover rounded-md" />
+
+                <Button type="button" class="mt-1" variant="outline" @click="$refs.image.click()">
+                  {{ $t('Choose File') }}
+                </Button>
+
+                <Button
+                  v-if="form.imageUrl !== null"
+                  type="button"
+                  class="mt-1 ml-1"
+                  variant="destructive"
+                  @click="(form.image = ''), (form.imageUrl = null)">
+                  {{ $t('Delete') }}
+                </Button>
+
+                <span v-if="form.image" class="mt-1 block text-sm text-gray-600">
+                  {{ form.image.name }}
+                </span>
+
+                <Progress v-if="form.progress" class="mt-1" :model-value="form.progress.percentage" />
+
+                <!-- hidden input to handle the file selection -->
+                <input id="image" ref="image" class="hidden" type="file" @input="form.image = $event.target.files[0]" />
+
+                <InputError class="mt-2" :message="form.errors.image" />
               </div>
 
               <div class="flex items-center gap-4">

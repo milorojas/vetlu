@@ -36,10 +36,23 @@ class BranchController extends Controller
         $request->validate([
             'name' => 'required|string',
             'address' => 'required|string',
-            'email' => 'required|email'
+            'email' => 'required|email',
+            'image' => 'nullable|image|max:1024',
         ]);
 
-        Branch::create($request->all());
+        $imageUrl = $request->image ? $request->image->store('public/branches') : null;
+
+        // Remove public from the image URL
+        if ($imageUrl !== null) {
+            $imageUrl = str_replace('public/', '', $imageUrl);
+        }
+
+        Branch::create([
+            'name' => $request->name,
+            'address' => $request->address,
+            'email' => $request->email,
+            'image' => $imageUrl,
+        ]);
 
         return redirect()->route('branches.index')->with('toast', [
             'message' => __('Branch created successfully.'),
@@ -61,7 +74,13 @@ class BranchController extends Controller
     public function edit(Branch $branch)
     {
         return Inertia::render('Branches/Edit', [
-            'branch' => $branch,
+            'branch' => [
+                'id' => $branch->id,
+                'name' => $branch->name,
+                'address' => $branch->address,
+                'email' => $branch->email,
+                'imageUrl' => $branch->image ? $branch->image : null,
+            ],
         ]);
     }
 
@@ -73,10 +92,27 @@ class BranchController extends Controller
         $request->validate([
             'name' => 'required|string',
             'address' => 'required|string',
-            'email' => 'required|email'
+            'email' => 'required|email',
+            'image' => 'nullable|image|max:1024',
         ]);
 
-        $branch->update($request->all());
+        if ($request->imageUrl === null) {
+            $branch->image = null;
+        }
+
+        $imageUrl = $request->image ? $request->image->store('public/branches') : $branch->image;
+
+        if ($imageUrl !== null) {
+            // Remove public from the image URL
+            $imageUrl = str_replace('public/', '', $imageUrl);
+        }
+
+        $branch->update([
+            'name' => $request->name,
+            'address' => $request->address,
+            'email' => $request->email,
+            'image' => $imageUrl,
+        ]);
 
         return redirect()->route('branches.index')->with('toast', [
             'message' => __('Branch updated successfully.'),

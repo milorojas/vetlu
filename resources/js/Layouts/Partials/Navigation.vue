@@ -16,7 +16,7 @@ const navigationSettings = [
     name: 'Branches',
     href: route('branches.index'),
     icon: 'tabler:building-hospital',
-    current: usePage().component.startsWith('Branches/Index'),
+    current: usePage().component.startsWith('Branches/'),
   },
 ];
 </script>

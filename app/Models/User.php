@@ -85,7 +85,7 @@ class User extends Authenticatable
      */
     public function getBranchesAttribute()
     {
-        $branches =  Branch::all();
+        $branches = Branch::all();
 
         return $branches;
     }

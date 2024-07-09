@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
     use HasFactory;
-    
+
     /**
      * The attributes that are mass assignable.
      *

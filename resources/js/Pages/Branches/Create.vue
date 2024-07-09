@@ -4,6 +4,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import Button from '@/Components/ui/button/Button.vue';
+import { Progress } from '@/Components/ui/progress';
 import BaseLayout from '@/Layouts/BaseLayout.vue';
 import SidebaLayout from '@/Layouts/SidebarLayout.vue';
 import { useForm } from '@inertiajs/vue3';
@@ -17,11 +18,12 @@ const form = useForm({
   name: '',
   address: '',
   email: '',
+  image: null,
 });
 </script>
 
 <template>
-  <SidebaLayout>
+  <SidebaLayout :title="$t('Create Branch')">
     <div class="py-4">
       <Breadcrumbs
         :pages="[
@@ -62,6 +64,25 @@ const form = useForm({
                 <TextInput id="email" v-model="form.email" type="text" class="mt-1 block w-full" />
 
                 <InputError class="mt-2" :message="form.errors.email" />
+              </div>
+
+              <div>
+                <InputLabel for="image" :value="$t('Image')" />
+
+                <Button type="button" class="mt-1" variant="outline" @click="$refs.image.click()">
+                  {{ $t('Choose File') }}
+                </Button>
+
+                <span v-if="form.image" class="mt-1 block text-sm text-gray-600">
+                  {{ form.image.name }}
+                </span>
+
+                <Progress v-if="form.progress" class="mt-1" :model-value="form.progress.percentage" />
+
+                <!-- hidden input to handle the file selection -->
+                <input id="image" ref="image" class="hidden" type="file" @input="form.image = $event.target.files[0]" />
+
+                <InputError class="mt-2" :message="form.errors.image" />
               </div>
 
               <div class="flex items-center gap-4">
