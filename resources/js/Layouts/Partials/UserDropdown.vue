@@ -57,7 +57,12 @@ const updateBranch = () => {
           class="w-full border rounded-md bg-gray-50 px-3.5 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-100">
           <span class="flex w-full items-center justify-between">
             <span class="flex min-w-0 items-center justify-between space-x-3">
-              <img class="h-10 w-10 flex-shrink-0 rounded-md bg-gray-300" :src="user.profile_photo_url" alt="" />
+              <img
+                v-if="user.branch?.image"
+                class="h-10 w-10 flex-shrink-0 rounded-md bg-gray-300"
+                :src="'/storage/' + user.branch?.image"
+                alt="Branch image" />
+              <img v-else class="h-10 w-10 flex-shrink-0 rounded-md bg-gray-300" :src="user.profile_photo_url" alt="" />
               <span class="flex min-w-0 flex-1 flex-col">
                 <span class="truncate text-sm font-medium text-gray-900">{{ user.name }}</span>
                 <div class="flex items-center">
