@@ -16,6 +16,11 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/Components/ui/dropdown-menu';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/Components/ui/table';
@@ -35,6 +40,11 @@ const props = defineProps({
 
 const showConfirmationDialog = ref(false);
 const branchToDelete = ref(null);
+
+// Set status
+const changeStatus = (branchId, status) => {
+  router.patch(route('branches.change-status', branchId), { status });
+};
 </script>
 
 <template>
@@ -99,6 +109,35 @@ const branchToDelete = ref(null);
                               <Icon icon="tabler:edit" class="w-4 h-4 inline-block mr-2" />
                               <span>{{ $t('Edit') }}</span>
                             </DropdownMenuItem>
+
+                            <DropdownMenuSub>
+                              <DropdownMenuSubTrigger>
+                                <Icon icon="tabler:circle-dashed" class="w-4 h-4 inline-block mr-2" />
+                                <span>{{ $t('Set status') }}</span>
+                              </DropdownMenuSubTrigger>
+                              <DropdownMenuPortal>
+                                <DropdownMenuSubContent>
+                                  <DropdownMenuItem
+                                    :disabled="branch.status == 'active'"
+                                    @select="changeStatus(branch.id, 'active')">
+                                    <Icon
+                                      icon="tabler:circle-dashed-check"
+                                      class="w-4 h-4 inline-block mr-2 text-green-500" />
+                                    <span class="font-mono text-sm lowercase">{{ $t('Active') }}</span>
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem
+                                    :disabled="branch.status == 'inactive'"
+                                    @select="changeStatus(branch.id, 'inactive')">
+                                    <Icon
+                                      icon="tabler:circle-dashed-x"
+                                      class="w-4 h-4 inline-block mr-2 text-red-500" />
+                                    <span class="font-mono text-sm lowercase">{{ $t('Inactive') }}</span>
+                                  </DropdownMenuItem>
+                                </DropdownMenuSubContent>
+                              </DropdownMenuPortal>
+                            </DropdownMenuSub>
+
+                            <DropdownMenuSeparator />
 
                             <DropdownMenuItem @select="(showConfirmationDialog = true), (branchToDelete = branch.id)">
                               <Icon icon="tabler:trash" class="w-4 h-4 inline-block mr-2 text-red-500" />

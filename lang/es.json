@@ -275,5 +275,7 @@
   "You cannot delete the branch you are currently using.": "No puede eliminar la sucursal que está utilizando actualmente.",
   "Branch switched successfully.": "Sucursal cambiada con éxito.",
   "Are you sure?": "¿Estás seguro?",
-  "This action cannot be undone. Are you sure you want to delete this branch?": "Esta acción no se puede deshacer. ¿Estás seguro que deseas eliminar esta sucursal?"
+  "This action cannot be undone. Are you sure you want to delete this branch?": "Esta acción no se puede deshacer. ¿Estás seguro que deseas eliminar esta sucursal?",
+  "Set status": "Establecer estado",
+  "Branch status changed successfully.": "Estado de la sucursal cambiado con éxito."
 }

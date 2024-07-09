@@ -118,9 +118,11 @@ const updateBranch = () => {
             <SelectGroup>
               <SelectLabel>{{ $t('Branches') }}</SelectLabel>
 
-              <SelectItem v-for="branch in branches" :key="branch.id" :value="String(branch.id)">
-                {{ branch.name }}
-              </SelectItem>
+              <template v-for="branch in branches" :key="branch.id">
+                <SelectItem v-if="branch.status == 'active'" :value="String(branch.id)">
+                  {{ branch.name }}
+                </SelectItem>
+              </template>
             </SelectGroup>
           </SelectContent>
         </Select>

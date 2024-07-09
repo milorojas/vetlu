@@ -139,4 +139,20 @@ class BranchController extends Controller
             'type' => 'success',
         ]);
     }
+
+
+    /*
+    * Change the status of the branch
+    */
+    public function changeStatus(Branch $branch, Request $request)
+    {
+        $branch->update([
+            'status' => $request->status,
+        ]);
+
+        return redirect()->back()->with('toast', [
+            'message' => __('Branch status changed successfully.'),
+            'type' => 'success',
+        ]);
+    }
 }
