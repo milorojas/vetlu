@@ -1,12 +1,21 @@
 <script setup>
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import Modal from '@/Components/Modal.vue';
 import TextInput from '@/Components/TextInput.vue';
 import Button from '@/Components/ui/button/Button.vue';
 import { useForm } from '@inertiajs/vue3';
 import { trans } from 'laravel-vue-i18n';
 import { nextTick, ref } from 'vue';
+
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/Components/ui/alert-dialog';
 
 const confirmingUserDeletion = ref(false);
 const passwordInput = ref(null);
@@ -53,19 +62,20 @@ const closeModal = () => {
 
     <Button variant="destructive" @click="confirmUserDeletion">{{ trans('Delete Account') }}</Button>
 
-    <Modal :show="confirmingUserDeletion" @close="closeModal">
-      <div class="p-6">
-        <h2 class="font-medium text-gray-900">{{ trans('Are you sure you want to delete your account?') }}</h2>
+    <AlertDialog :open="confirmingUserDeletion" @update:open="confirmingUserDeletion = $event">
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{{ trans('Are you sure you want to delete your account?') }}</AlertDialogTitle>
+          <AlertDialogDescription>
+            {{
+              trans(
+                'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.'
+              )
+            }}
+          </AlertDialogDescription>
+        </AlertDialogHeader>
 
-        <p class="mt-1 text-sm text-gray-600">
-          {{
-            trans(
-              'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.'
-            )
-          }}
-        </p>
-
-        <div class="mt-6">
+        <div>
           <InputLabel for="password" :value="trans('Password')" class="sr-only" />
 
           <TextInput
@@ -73,21 +83,21 @@ const closeModal = () => {
             ref="passwordInput"
             v-model="form.password"
             type="password"
-            class="mt-1 block w-3/4"
+            class="mt-1 block w-full"
             :placeholder="trans('Password')"
             @keyup.enter="deleteUser" />
 
           <InputError :message="form.errors.password" class="mt-2" />
         </div>
 
-        <div class="mt-6 flex justify-end">
-          <Button variant="outline" @click="closeModal">{{ trans('Cancel') }}</Button>
+        <AlertDialogFooter>
+          <AlertDialogCancel>{{ trans('Cancel') }}</AlertDialogCancel>
 
           <Button class="ms-3" variant="destructive" :disabled="form.processing" @click="deleteUser">
             {{ trans('Delete Account') }}
           </Button>
-        </div>
-      </div>
-    </Modal>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   </section>
 </template>
