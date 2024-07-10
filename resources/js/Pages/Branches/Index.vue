@@ -43,7 +43,7 @@ const branchToDelete = ref(null);
 
 // Set status
 const changeStatus = (branchId, status) => {
-  router.patch(route('branches.change-status', branchId), { status });
+  router.patch(route('branches.change-status', branchId), { status }, { preserveState: false });
 };
 </script>
 
