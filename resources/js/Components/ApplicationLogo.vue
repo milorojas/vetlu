@@ -19,10 +19,10 @@ const props = defineProps({
 
 <template>
   <div class="flex items-center">
-    <div class="rounded-md border bg-primary-500 px-0.5 py-0.5 border-gray-300">
+    <div class="rounded-md border bg-primary-500 p-1 border-gray-300">
       <Icon
-        icon="solar:bone-linear"
-        class="text-white"
+        icon="simple-icons:macpaw"
+        class="text-white -rotate-45"
         aria-hidden="true"
         :width="props.width"
         :height="props.height" />
