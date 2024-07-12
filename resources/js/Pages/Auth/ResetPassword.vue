@@ -1,8 +1,8 @@
 <script setup>
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import Button from '@/Components/ui/button/Button.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
@@ -33,56 +33,58 @@ const submit = () => {
 
 <template>
   <GuestLayout>
-    <Head title="Reset Password" />
+    <Head :title="$t('Reset Password')" />
 
     <form @submit.prevent="submit">
-      <div>
-        <InputLabel for="email" value="Email" />
+      <div class="grid gap-4">
+        <div class="grid gap-2">
+          <h3 class="scroll-m-20 text-2xl font-semibold tracking-tight">{{ $t('Reset Password') }}</h3>
+        </div>
 
-        <TextInput
-          id="email"
-          v-model="form.email"
-          type="email"
-          class="mt-1 block w-full"
-          required
-          autofocus
-          autocomplete="username" />
+        <div class="grid gap-2">
+          <InputLabel for="email" :value="$t('Email')" />
 
-        <InputError class="mt-2" :message="form.errors.email" />
-      </div>
+          <TextInput
+            id="email"
+            v-model="form.email"
+            type="email"
+            class="mt-1 block w-full"
+            required
+            autofocus
+            autocomplete="username" />
 
-      <div class="mt-4">
-        <InputLabel for="password" value="Password" />
+          <InputError class="mt-2" :message="form.errors.email" />
+        </div>
 
-        <TextInput
-          id="password"
-          v-model="form.password"
-          type="password"
-          class="mt-1 block w-full"
-          required
-          autocomplete="new-password" />
+        <div class="grid gap-2">
+          <InputLabel for="password" :value="$t('Password')" />
 
-        <InputError class="mt-2" :message="form.errors.password" />
-      </div>
+          <TextInput
+            id="password"
+            v-model="form.password"
+            type="password"
+            class="mt-1 block w-full"
+            required
+            autocomplete="new-password" />
 
-      <div class="mt-4">
-        <InputLabel for="password_confirmation" value="Confirm Password" />
+          <InputError class="mt-2" :message="form.errors.password" />
+        </div>
 
-        <TextInput
-          id="password_confirmation"
-          v-model="form.password_confirmation"
-          type="password"
-          class="mt-1 block w-full"
-          required
-          autocomplete="new-password" />
+        <div class="grid gap-2">
+          <InputLabel for="password_confirmation" :value="$t('Confirm Password')" />
 
-        <InputError class="mt-2" :message="form.errors.password_confirmation" />
-      </div>
+          <TextInput
+            id="password_confirmation"
+            v-model="form.password_confirmation"
+            type="password"
+            class="mt-1 block w-full"
+            required
+            autocomplete="new-password" />
 
-      <div class="flex items-center justify-end mt-4">
-        <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-          Reset Password
-        </PrimaryButton>
+          <InputError class="mt-2" :message="form.errors.password_confirmation" />
+        </div>
+
+        <Button type="submit" class="w-full" :disabled="form.processing">{{ $t('Reset Password') }}</Button>
       </div>
     </form>
   </GuestLayout>

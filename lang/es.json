@@ -279,5 +279,9 @@
   "Set status": "Establecer estado",
   "Branch status changed successfully.": "Estado de la sucursal cambiado con éxito.",
   "Don't have an account?": "¿No tienes una cuenta?",
-  "Sign up": "Regístrate"
+  "Sign up": "Regístrate",
+  "Send Link": "Enviar enlace",
+  "Back to login": "Volver a iniciar sesión",
+  "Enter your email address and we will send you a link to reset your password.": "Ingrese su dirección de correo electrónico y le enviaremos un enlace para restablecer su contraseña.",
+  "Forgot Password?": "¿Olvidó su contraseña?"
 }

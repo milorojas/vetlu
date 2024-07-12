@@ -1,10 +1,10 @@
 <script setup>
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import Button from '@/Components/ui/button/Button.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 
 defineProps({
   status: {
@@ -23,37 +23,33 @@ const submit = () => {
 
 <template>
   <GuestLayout>
-    <Head title="Forgot Password" />
-
-    <div class="mb-4 text-sm text-gray-600">
-      Forgot your password? No problem. Just let us know your email address and we will email you a password reset link
-      that will allow you to choose a new one.
-    </div>
-
-    <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-      {{ status }}
-    </div>
+    <Head :title="$t('Forgot Password?')" />
 
     <form @submit.prevent="submit">
-      <div>
-        <InputLabel for="email" value="Email" />
-
-        <TextInput
-          id="email"
-          v-model="form.email"
-          type="email"
-          class="mt-1 block w-full"
-          required
-          autofocus
-          autocomplete="username" />
-
-        <InputError class="mt-2" :message="form.errors.email" />
+      <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+        {{ status }}
       </div>
 
-      <div class="flex items-center justify-end mt-4">
-        <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-          Email Password Reset Link
-        </PrimaryButton>
+      <div class="grid gap-4">
+        <div class="grid gap-2">
+          <h3 class="scroll-m-20 text-2xl font-semibold tracking-tight">{{ $t('Forgot Password?') }}</h3>
+          <p class="text-sm">
+            {{ $t('Enter your email address and we will send you a link to reset your password.') }}
+          </p>
+        </div>
+
+        <div class="grid gap-2">
+          <InputLabel for="email" :value="$t('Email')" />
+
+          <TextInput id="email" v-model="form.email" type="email" class="block w-full" required autocomplete="email" />
+
+          <InputError class="mt-2" :message="form.errors.email" />
+        </div>
+
+        <Button type="submit" class="w-full" :disabled="form.processing">{{ $t('Send Link') }}</Button>
+      </div>
+      <div class="mt-4 text-center text-sm">
+        <Link :href="route('login')" class="underline">{{ $t('Back to login') }}</Link>
       </div>
     </form>
   </GuestLayout>
