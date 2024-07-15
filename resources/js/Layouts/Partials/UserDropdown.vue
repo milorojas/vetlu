@@ -79,6 +79,11 @@ const switchBranch = branchId => {
                 <span class="font-sm font-medium">{{ branch.name }}</span>
               </DropdownMenuItem>
             </template>
+            <template v-if="branches.length == 0">
+              <DropdownMenuItem :disabled="true">
+                <span class="font-sm font-medium">{{ $t('No branches') }}</span>
+              </DropdownMenuItem>
+            </template>
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
