@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Laravel\Pennant\Feature;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -27,7 +28,9 @@ Route::middleware('auth')->group(function () {
 });
 
 // Branches routes
-Route::resource('branches', BranchController::class)->middleware('auth');
-Route::patch('branches/{branch}/change-status', [BranchController::class, 'changeStatus'])->middleware('auth')->name('branches.change-status');
+if (Feature::value('branches')) {
+    Route::resource('branches', BranchController::class)->middleware('auth');
+    Route::patch('branches/{branch}/change-status', [BranchController::class, 'changeStatus'])->middleware('auth')->name('branches.change-status');
+}
 
 require __DIR__.'/auth.php';

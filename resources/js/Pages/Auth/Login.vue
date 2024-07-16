@@ -53,7 +53,8 @@ const submit = () => {
             class="block w-full"
             required
             autofocus
-            autocomplete="email" />
+            autocomplete="email"
+            tabindex="1" />
 
           <InputError class="mt-2" :message="form.errors.email" />
         </div>
@@ -65,7 +66,8 @@ const submit = () => {
             <Link
               v-if="canResetPassword"
               :href="route('password.request')"
-              class="ml-auto inline-block text-sm underline">
+              class="ml-auto inline-block text-sm underline"
+              tabindex="-1">
               {{ $t('Forgot your password?') }}
             </Link>
           </div>
@@ -75,7 +77,8 @@ const submit = () => {
             type="password"
             class="mt-1 block w-full"
             required
-            autocomplete="current-password" />
+            autocomplete="current-password"
+            tabindex="2" />
 
           <InputError class="mt-2" :message="form.errors.password" />
         </div>

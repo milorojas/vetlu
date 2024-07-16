@@ -27,7 +27,7 @@ const props = defineProps({
         :width="props.width"
         :height="props.height" />
     </div>
-    <span v-if="props.text" class="ml-2 font-bold font-mono text-lg text-gray-700">
+    <span v-if="props.text" class="ml-2 font-bold text-lg text-gray-700">
       {{ props.text }}
     </span>
   </div>

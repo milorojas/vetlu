@@ -35,6 +35,9 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'toast' => session('toast'),
+            'app' => [
+                'name' => config('app.name')
+            ],
         ];
     }
 }

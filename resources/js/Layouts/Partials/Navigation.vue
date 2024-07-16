@@ -1,6 +1,9 @@
 <script setup>
+import { useUser } from '@/Composables/user';
 import { Icon } from '@iconify/vue';
 import { Link, usePage } from '@inertiajs/vue3';
+
+const user = useUser();
 
 const navigation = [
   {
@@ -11,14 +14,17 @@ const navigation = [
   },
 ];
 
-const navigationSettings = [
-  {
+const navigationSettings = [];
+
+// feature flags navigation items
+if (user.value.features.branches) {
+  navigationSettings.push({
     name: 'Branches',
     href: route('branches.index'),
     icon: 'tabler:building-hospital',
     current: usePage().component.startsWith('Branches/'),
-  },
-];
+  });
+}
 </script>
 <template>
   <li>

@@ -1,4 +1,5 @@
 <script setup>
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +11,7 @@ import {
 
 import { useUser } from '@/Composables/user.js';
 import { Icon } from '@iconify/vue';
-import { router } from '@inertiajs/vue3';
+import { router, usePage } from '@inertiajs/vue3';
 import { Primitive } from 'radix-vue';
 import { ref } from 'vue';
 
@@ -35,7 +36,8 @@ const switchBranch = branchId => {
   <!-- User account dropdown -->
   <div class="px-3 text-left w-full">
     <div class="flex justify-between items-center">
-      <DropdownMenu>
+      <!-- branches feature -->
+      <DropdownMenu v-if="user.features.branches">
         <DropdownMenuTrigger as-child>
           <Primitive
             as="button"
@@ -87,6 +89,8 @@ const switchBranch = branchId => {
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      <ApplicationLogo v-else :width="24" :height="24" :text="usePage().props.app.name" />
 
       <DropdownMenu>
         <DropdownMenuTrigger as-child class="ml-3">

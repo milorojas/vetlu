@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Pennant\Feature;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -57,7 +58,7 @@ class User extends Authenticatable
     /**
      * Make it available in the json response
      */
-    protected $appends = ['profile_photo_url', 'branches'];
+    protected $appends = ['profile_photo_url', 'branches', 'features'];
 
     /**
      * Get the default profile photo URL if no profile photo has been uploaded.
@@ -89,5 +90,13 @@ class User extends Authenticatable
         $branches = Branch::all();
 
         return $branches;
+    }
+
+    /**
+     * Get all the features
+     */
+    public function getFeaturesAttribute()
+    {
+        return Feature::all();
     }
 }
