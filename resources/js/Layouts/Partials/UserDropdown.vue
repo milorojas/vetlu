@@ -95,7 +95,7 @@ const switchBranch = branchId => {
       <DropdownMenu>
         <DropdownMenuTrigger as-child class="ml-3">
           <img
-            class="h-6 w-6 rounded-full flex-shrink-0 bg-gray-300 hover:cursor-pointer"
+            class="border border-gray-200 h-6 w-6 rounded-full flex-shrink-0 bg-gray-300 hover:cursor-pointer"
             :src="user.profile_photo_url"
             alt="User image" />
         </DropdownMenuTrigger>

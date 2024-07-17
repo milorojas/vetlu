@@ -13,11 +13,11 @@ export default {
 
   safelist: [
     {
-      pattern: /text-(gray|red)-.+/,
+      pattern: /text-(gray|red|primary)-.+/,
       variants: ['hover', 'dark'],
     },
     {
-      pattern: /bg-(gray|red)-.+/,
+      pattern: /bg-(gray|red|primary)-.+/,
       variants: ['hover', 'dark'],
     },
   ],
@@ -51,7 +51,7 @@ export default {
     },
     colors: {
       ...defaultColors,
-      primary: defaultColors.indigo,
+      primary: defaultColors.violet,
       gray: defaultColors.neutral,
     },
   },

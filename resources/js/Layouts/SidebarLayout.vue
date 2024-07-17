@@ -56,7 +56,8 @@ const sidebarOpen = ref(false);
                 </div>
               </TransitionChild>
               <!-- Sidebar component, swap this element with another sidebar if you like -->
-              <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-50 px-6 pb-2">
+              <div
+                class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-50 bg-gradient-to-br from-gray-50 via-indigo-100 to-primary-100 px-6 pb-2">
                 <!-- User Dropdown -->
                 <div class="relative -mx-5 pt-4">
                   <UserDropdown />
@@ -77,7 +78,8 @@ const sidebarOpen = ref(false);
     <!-- Static sidebar for desktop -->
     <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
-      <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-gray-50 px-6">
+      <div
+        class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-gradient-to-br from-gray-50 via-indigo-100 to-primary-50 px-6">
         <!-- User Dropdown -->
         <div class="relative -mx-5 pt-4">
           <UserDropdown />
