@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,5 +33,7 @@ if (Feature::value('branches')) {
     Route::resource('branches', BranchController::class)->middleware('auth');
     Route::patch('branches/{branch}/change-status', [BranchController::class, 'changeStatus'])->middleware('auth')->name('branches.change-status');
 }
+
+Route::resource('users', UserController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';

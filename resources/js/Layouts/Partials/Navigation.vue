@@ -14,7 +14,14 @@ const navigation = [
   },
 ];
 
-const navigationSettings = [];
+const navigationSettings = [
+  {
+    name: 'Users',
+    href: route('users.index'),
+    icon: 'tabler:users',
+    current: usePage().component.startsWith('Users/'),
+  },
+];
 
 // feature flags navigation items
 if (user.value.features.branches) {
